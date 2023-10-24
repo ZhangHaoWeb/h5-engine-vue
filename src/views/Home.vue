@@ -16,7 +16,7 @@ const editorSize = reactive(store.state.editor.editSize)
     <div class="main-wrapper">
         <SideBar></SideBar>
         <div class="content">
-            <div class="editor" :style="{width: editorSize.width + 1 +'px', height:editorSize.height + 1 +'px'}">
+            <div class="editor" :style="{ width: editorSize.width + 1 + 'px', height: editorSize.height + 1 + 'px' }">
                 <Grid></Grid>
             </div>
         </div>
