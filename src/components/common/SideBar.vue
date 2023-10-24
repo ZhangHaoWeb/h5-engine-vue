@@ -3,13 +3,13 @@ import { COMPONENT_LIST } from "@/constants/components"
 
 </script>
 
-<template>
+<template>  
     <div className="sidebar">
         <div className="sidebar-category">
-            <div v-for="(category, index) in COMPONENT_LIST" key={index} className="sidebar-category-box">
+            <div v-for="category in COMPONENT_LIST" :key="category.id" className="sidebar-category-box">
                 <div className="sidebar-category-title">{{ category.category }}</div>
                 <ul className="components-list">
-                    <li v-for="(component, i) in category.list" className="component-item" draggable key={i}>
+                    <li v-for="(component, i) in category.list" className="component-item" draggable :key="i">
                         {{ component.label }}
                     </li>
                 </ul>

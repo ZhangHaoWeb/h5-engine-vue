@@ -1,12 +1,20 @@
 <script setup>
 import Head from '../components/common/Head.vue';
 import SideBar from '../components/common/SideBar.vue';
+import Grid from '../components/common/Grid.vue';
+import Property from '../components/common/Property.Vue';
 </script>
 
 <template>
     <Head></Head>
-    <div className="main-wrapper">
+    <div class="main-wrapper">
         <SideBar></SideBar>
+        <div class="content">
+            <div class="editor">
+                <Grid></Grid>
+            </div>
+        </div>
+        <Property></Property>
     </div>
 </template>
 
@@ -17,5 +25,30 @@ import SideBar from '../components/common/SideBar.vue';
     flex-grow: 1;
     height: 100%;
     overflow: hidden;
+
+    .content {
+        border-right: 1px solid #262626;
+        flex-grow: 1;
+        padding: 10px;
+        height: 100%;
+        box-sizing: border-box;
+        overflow: auto;
+        position: relative;
+
+        .editor {
+            position: relative;
+            margin: 0 auto;
+            border-radius: 2px;
+            user-select: none;
+            box-sizing: border-box;
+
+            .editor-component {
+                width: 100%;
+                height: 100%;
+                user-select: none;
+                box-sizing: border-box;
+            }
+        }
+    }
 }
 </style>
