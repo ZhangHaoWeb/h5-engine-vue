@@ -1,6 +1,6 @@
 const state = () => ({
     editSize: {
-        width: 350,
+        width: 375,
         height: 750
     }
 })

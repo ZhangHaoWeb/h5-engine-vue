@@ -1,8 +1,14 @@
 <script setup>
+import { reactive } from 'vue'
+import { useStore } from 'vuex'
 import Head from '../components/common/Head.vue';
 import SideBar from '../components/common/SideBar.vue';
 import Grid from '../components/common/Grid.vue';
 import Property from '../components/common/Property.Vue';
+
+const store = useStore()
+const editorSize = reactive(store.state.editor.editSize)
+
 </script>
 
 <template>
@@ -10,7 +16,7 @@ import Property from '../components/common/Property.Vue';
     <div class="main-wrapper">
         <SideBar></SideBar>
         <div class="content">
-            <div class="editor">
+            <div class="editor" :style="{width: editorSize.width + 1 +'px', height:editorSize.height + 1 +'px'}">
                 <Grid></Grid>
             </div>
         </div>
