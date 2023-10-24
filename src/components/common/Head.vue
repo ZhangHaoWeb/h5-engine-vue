@@ -1,13 +1,12 @@
 <script setup>
-const width = 350
-const height = 750
+import { reactive } from 'vue'
+import { useStore } from 'vuex'
 
-function changeWidth() {
+const store = useStore()
+const editorSize = reactive(store.state.editor.editSize)
 
-}
-
-function changeHeight() {
-
+function changeEditorSize() {
+    store.commit("editor/changeEditSize", editorSize)
 }
 </script>
 
@@ -19,9 +18,9 @@ function changeHeight() {
         <div class="header-r">
             <div class="size-controller mr-8">
                 <div class="ml-8">画布宽</div>
-                <div><input type="text" @input={changeWidth} v-model="width" /></div>
+                <div><input type="number" @input="changeEditorSize" v-model="editorSize.width" /></div>
                 <div class="ml-8">画布高</div>
-                <div><input type="text" @input={changeHeight} v-model="height" /></div>
+                <div><input type="number" @input="changeEditorSize" v-model="editorSize.height" /></div>
             </div>
             <button class="btn ml-8">预览</button>
             <button class="btn ml-8">保存</button>
@@ -56,7 +55,7 @@ function changeHeight() {
         .size-controller {
             display: flex;
             align-items: center;
-    
+
             input {
                 width: 60px;
             }
