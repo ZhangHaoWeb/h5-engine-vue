@@ -1,11 +1,12 @@
 <script setup>
 import Head from '../components/common/Head.vue';
+import SideBar from '../components/common/SideBar.vue';
 </script>
 
 <template>
     <Head></Head>
     <div className="main-wrapper">
-
+        <SideBar></SideBar>
     </div>
 </template>
 
