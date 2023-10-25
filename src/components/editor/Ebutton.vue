@@ -1,10 +1,7 @@
 <script setup>
-
 const props = defineProps({
     defaultProps: Object
 })
-
-console.log(props.defaultProps)
 
 
 </script>
