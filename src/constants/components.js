@@ -6,7 +6,7 @@ export const COMPONENT_LIST =  [
         category: "基础",
         list: [
             {
-                type: "TextComponent",
+                type: "E-text",
                 label: "文字",
                 defaultValue: "双击编辑",
                 style: {
@@ -17,7 +17,7 @@ export const COMPONENT_LIST =  [
                 }
             },
             {
-                type: "ButtonComponent",
+                type: "Ebutton",
                 label: "按钮",
                 defaultValue: "BUTTON",
                 style: {
@@ -29,7 +29,7 @@ export const COMPONENT_LIST =  [
                 }
             },
             {
-                type: "LinkComponent",
+                type: "E-link",
                 label: "链接",
                 defaultValue: "https://",
                 style: {
@@ -40,7 +40,7 @@ export const COMPONENT_LIST =  [
                 }
             },
             {
-                type: "ImageComponent",
+                type: "E-img",
                 label: "图片",
                 defaultValue: "IMAGE",
                 style: {

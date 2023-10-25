@@ -1,6 +1,10 @@
 <script setup>
 import { COMPONENT_LIST } from "@/constants/components"
 
+
+function handlerDragStart(e, id, idx) {
+    e.dataTransfer.setData('component', `${id}-${idx}`)
+}
 </script>
 
 <template>  
@@ -9,7 +13,13 @@ import { COMPONENT_LIST } from "@/constants/components"
             <div v-for="category in COMPONENT_LIST" :key="category.id" className="sidebar-category-box">
                 <div className="sidebar-category-title">{{ category.category }}</div>
                 <ul className="components-list">
-                    <li v-for="(component, i) in category.list" className="component-item" draggable :key="i">
+                    <li 
+                        v-for="(component, i) in category.list"
+                        :key="i"
+                        className="component-item"
+                        draggable="true"
+                        @dragstart="handlerDragStart($event, category.id, i)"
+                    >
                         {{ component.label }}
                     </li>
                 </ul>
