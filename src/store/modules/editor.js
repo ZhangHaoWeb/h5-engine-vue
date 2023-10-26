@@ -15,6 +15,9 @@ const mutations = {
     editAddComponent(state, payload) {
         state.editComponentList.push(payload)
         state.currentComponent = state.editComponentList.length - 1
+    },
+    changeCurrentComponent: (state, payload) => {
+        state.currentComponent = payload
     }
 }
 

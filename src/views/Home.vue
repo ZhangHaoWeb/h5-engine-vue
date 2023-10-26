@@ -47,7 +47,7 @@ function handlerDrop(e) {
             <div class="editor" ref="editorRef"
                 :style="{ width: editorSize.width + 1 + 'px', height: editorSize.height + 1 + 'px' }">
                 <Grid></Grid>
-                <Shape :defaultProps="component"  v-for="(component, i) in editComponentList">
+                <Shape :defaultProps="component"  v-for="(component, i) in editComponentList" :idx="i" :id="'E_Component_' + i">
                     <component class="component-cell" :is="component.type"
                         :defaultProps="component" />
                 </Shape>

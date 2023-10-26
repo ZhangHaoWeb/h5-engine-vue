@@ -1,12 +1,63 @@
 <script setup>
+import { ref, reactive } from "vue"
+import { useStore } from "vuex"
 const props = defineProps({
-    defaultProps: Object
+    defaultProps: Object,
+    idx: Number
 })
+const store = useStore()
+const pointList = ['t', 'r', 'b', 'l', 'lt', 'rt', 'lb', 'rb']
+const editStore = reactive(store.state.editor)
+
+function getShapeResizePointStyle(point) {
+    const width = parseInt(props.defaultProps.style.width, 10)
+    const height = parseInt(props.defaultProps.style.height, 10)
+    const hasT = /t/.test(point)
+    const hasB = /b/.test(point)
+    const hasL = /l/.test(point)
+    const hasR = /r/.test(point)
+    let newLeft = 0
+    let newTop = 0
+
+    if (point.length === 2) {
+        newLeft = hasL ? 0 : width
+        newTop = hasT ? 0 : height
+    } else {
+        // 上下两点的点，宽度居中
+        if (hasT || hasB) {
+            newLeft = width / 2
+            newTop = hasT ? 0 : height
+        }
+
+        // 左右两边的点，高度居中
+        if (hasL || hasR) {
+            newLeft = hasL ? 0 : width
+            newTop = Math.floor(height / 2)
+        }
+    }
+
+    const style = {
+        marginLeft: hasR ? '-5px' : '-4px',
+        marginTop: '-5px',
+        left: `${newLeft}px`,
+        top: `${newTop}px`,
+        // cursor: point.split('').reverse().map(m => this.directionKey[m]).join('') + '-resize',
+    }
+    return style
+}
+
+function changeShapeSelected() {
+    store.commit("editor/changeCurrentComponent", props.idx)
+}
 </script>
 
 <template>
-    <div :class="{'shape-container':true}" :style="defaultProps.style">
+    <div class="shape-container" :style="defaultProps.style" @click="changeShapeSelected">
         <slot></slot>
+        <div class="shape-editor" v-if="editStore.currentComponent == idx">
+            <div v-for="(item, i) in pointList" :key="i" class="shape-resize-point" :style="getShapeResizePointStyle(item)">
+            </div>
+        </div>
     </div>
 </template>
 
@@ -23,6 +74,7 @@ const props = defineProps({
         top: 0;
         left: 0;
         box-sizing: border-box;
+        border: 1px solid #42b883;
     }
 
     .shape-resize-point {
@@ -32,11 +84,6 @@ const props = defineProps({
         border: 1px solid #42b883;
         border-radius: 6px;
         background-color: #fff;
-    }
-}
-.component-selected {
-    .shape-editor {
-        border: 1px solid #42b883;
     }
 }
 </style>
