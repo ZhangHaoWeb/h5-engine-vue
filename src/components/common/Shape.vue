@@ -1,0 +1,42 @@
+<script setup>
+const props = defineProps({
+    defaultProps: Object
+})
+</script>
+
+<template>
+    <div :class="{'shape-container':true}" :style="defaultProps.style">
+        <slot></slot>
+    </div>
+</template>
+
+<style lang="scss">
+.shape-container {
+    position: absolute;
+    cursor: move;
+    box-sizing: border-box;
+
+    .shape-editor {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+    }
+
+    .shape-resize-point {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border: 1px solid #42b883;
+        border-radius: 6px;
+        background-color: #fff;
+    }
+}
+.component-selected {
+    .shape-editor {
+        border: 1px solid #42b883;
+    }
+}
+</style>

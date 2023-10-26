@@ -2,16 +2,15 @@
 const props = defineProps({
     defaultProps: Object
 })
-
-
 </script>
 
 <template>
-    <div class="e-button">{{defaultProps.defaultValue}}</div>
+    <img class="e-image" :src="defaultProps.src" />
 </template>
 
 <style lang="scss">
-.e-button {
-    text-align: center;
+.e-image {
+    width: 100%;
+    height: 100%;
 }
 </style>

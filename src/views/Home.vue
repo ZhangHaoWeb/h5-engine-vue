@@ -5,6 +5,7 @@ import Head from '../components/common/Head.vue';
 import SideBar from '../components/common/SideBar.vue';
 import Grid from '../components/common/Grid.vue';
 import Property from '../components/common/Property.Vue';
+import Shape from '../components/common/Shape.vue';
 import { COMPONENT_LIST } from "@/constants/components";
 
 const store = useStore()
@@ -46,8 +47,10 @@ function handlerDrop(e) {
             <div class="editor" ref="editorRef"
                 :style="{ width: editorSize.width + 1 + 'px', height: editorSize.height + 1 + 'px' }">
                 <Grid></Grid>
-                <component class="component-cell" v-for="(component, i) in editComponentList" :is="component.type"
-                    :defaultProps="component" />
+                <Shape :defaultProps="component"  v-for="(component, i) in editComponentList">
+                    <component class="component-cell" :is="component.type"
+                        :defaultProps="component" />
+                </Shape>
             </div>
         </div>
         <Property></Property>
@@ -85,9 +88,9 @@ function handlerDrop(e) {
                 box-sizing: border-box;
             }
 
-            .component-cell {
-                position: absolute;
-            }
+            // .component-cell {
+            //     position: absolute;
+            // }
         }
     }
 }

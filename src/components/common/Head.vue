@@ -35,9 +35,11 @@ function changeEditorSize() {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #262626;
+    height: 64px;
+    box-sizing: border-box;
 
     .header-title {
-        font-size: 28px;
+        font-size: 24px;
         font-weight: bold;
         font-family: fantasy, monospace;
         background-image: linear-gradient(to right, #f06, #9f6);
