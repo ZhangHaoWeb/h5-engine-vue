@@ -18,7 +18,14 @@ const mutations = {
     },
     changeCurrentComponent: (state, payload) => {
         state.currentComponent = payload
-    }
+    },
+    editComponentStyle: (state, payload) => {
+        const idx = payload.idx
+        state.editComponentList[idx].style = {
+            ...state.editComponentList[idx].style,
+            ...payload.style
+        }
+    },
 }
 
 export default {

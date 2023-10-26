@@ -49,10 +49,43 @@ function getShapeResizePointStyle(point) {
 function changeShapeSelected() {
     store.commit("editor/changeCurrentComponent", props.idx)
 }
+
+function handlerMouseDown(e) {
+    e.stopPropagation()
+    e.preventDefault()
+    const startY = e.clientY
+    const startX = e.clientX
+    const componentDOM = e.target.parentNode
+    const { clientWidth, clientHeight, offsetLeft, offsetTop } = componentDOM
+
+    const move = (moveEvent) => {
+        const moveX = moveEvent.clientX - startX
+        const moveY = moveEvent.clientY - startY
+        const left = offsetLeft + moveX
+        const top = offsetTop + moveY
+
+        // boundaryEditor(idx, clientWidth, clientHeight, left, top)
+        store.commit("editor/editComponentStyle", {
+            idx: props.idx,
+            style: {
+                left: left + 'px',
+                top: top + 'px'
+            }
+        })
+    }
+
+    const up = () => {
+        document.removeEventListener('mousemove', move)
+        document.removeEventListener('mouseup', up)
+    }
+
+    document.addEventListener('mousemove', move)
+    document.addEventListener('mouseup', up)
+}
 </script>
 
 <template>
-    <div class="shape-container" :style="defaultProps.style" @click="changeShapeSelected">
+    <div class="shape-container" :style="defaultProps.style" @click="changeShapeSelected" @mousedown="handlerMouseDown">
         <slot></slot>
         <div class="shape-editor" v-if="editStore.currentComponent == idx">
             <div v-for="(item, i) in pointList" :key="i" class="shape-resize-point" :style="getShapeResizePointStyle(item)">
