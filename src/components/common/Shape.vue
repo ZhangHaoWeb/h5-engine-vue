@@ -53,6 +53,7 @@ function changeShapeSelected() {
 function handlerMouseDown(e) {
     e.stopPropagation()
     e.preventDefault()
+    changeShapeSelected()
     const startY = e.clientY
     const startX = e.clientX
     const componentDOM = e.target.parentNode
@@ -85,7 +86,7 @@ function handlerMouseDown(e) {
 </script>
 
 <template>
-    <div class="shape-container" :style="defaultProps.style" @click="changeShapeSelected" @mousedown="handlerMouseDown">
+    <div class="shape-container" :style="defaultProps.style" @mousedown="handlerMouseDown">
         <slot></slot>
         <div class="shape-editor" v-if="editStore.currentComponent == idx">
             <div v-for="(item, i) in pointList" :key="i" class="shape-resize-point" :style="getShapeResizePointStyle(item)">
