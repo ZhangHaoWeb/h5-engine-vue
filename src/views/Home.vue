@@ -87,10 +87,6 @@ function handlerDrop(e) {
                 user-select: none;
                 box-sizing: border-box;
             }
-
-            // .component-cell {
-            //     position: absolute;
-            // }
         }
     }
 }
