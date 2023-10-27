@@ -84,27 +84,49 @@ function handlerMouseDown(e) {
     document.addEventListener('mouseup', up)
 }
 
-function handlerResizeDown(e) {
+function handlerResizeDown(e, point) {
     e.stopPropagation()
     e.preventDefault()
     const startY = e.clientY
     const startX = e.clientX
-    const componentDOM = e.target.parentNode
-    const { clientWidth, clientHeight, offsetLeft, offsetTop } = componentDOM
+    const { width: strWidth, height: strHeight, left: strLeft, top: strTop } = props.defaultProps.style
+    const width = parseInt(strWidth, 10)
+    const height = parseInt(strHeight, 10)
+    const left = parseInt(strLeft, 10)
+    const top = parseInt(strTop, 10)
 
+
+
+    console.log(width, height, top, left)
 
     const move = (moveEvent) => {
-        const moveX = moveEvent.clientX - startX
-        const moveY = moveEvent.clientY - startY
-        const left = offsetLeft + moveX
-        const top = offsetTop + moveY
+        const currX = moveEvent.clientX
+        const currY = moveEvent.clientY
+        const disY = currY - startY
+        const disX = currX - startX
+
+        console.log(point)
+
+        const hasN = /n/.test(point)
+        const hasS = /s/.test(point)
+        const hasW = /w/.test(point)
+        const hasE = /e/.test(point)
+        const newHeight = height + (hasN ? -disY : hasS ? disY : 0)
+        const newWidth = width + (hasW ? -disX : hasE ? disX : 0)
+
+        const newStyle = {
+            width: (newWidth > 0 ? newWidth : 0) + 'px',
+            height:( newHeight > 0 ? newHeight : 0) + 'px',
+            left: (left + (hasW ? disX : 0)) + 'px',
+            top:  (top + (hasN ? disY : 0)) + 'px',
+        }
+
+
+        console.log(newStyle)
 
         store.commit("editor/editComponentStyle", {
             idx: props.idx,
-            style: {
-                left: left + 'px',
-                top: top + 'px'
-            }
+            style: newStyle
         })
     }
 
@@ -124,7 +146,7 @@ function handlerResizeDown(e) {
         <slot></slot>
         <div class="shape-editor" v-if="editStore.currentComponent == idx">
             <div v-for="(item, i) in pointList" :key="i" class="shape-resize-point" :style="getShapeResizePointStyle(item)"
-                @mousedown="handlerResizeDown">
+                @mousedown="handlerResizeDown($event, item)">
             </div>
         </div>
     </div>
