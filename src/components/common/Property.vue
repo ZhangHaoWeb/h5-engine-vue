@@ -4,7 +4,9 @@
 </script>
 
 <template>
-    <div class="property">this is property</div>
+    <div class="property">
+        <slot></slot>
+    </div>
 </template>
 
 <style lang="scss">

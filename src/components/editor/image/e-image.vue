@@ -1,19 +1,19 @@
 <script setup>
+defineOptions({
+    name: "e-image-attr"
+})
 const props = defineProps({
     defaultProps: Object
 })
-
-
 </script>
 
 <template>
-    <div class="e-button" :style="{lineHeight: defaultProps.style.height}">{{defaultProps.defaultValue}}</div>
+    <img class="e-image" :src="defaultProps.src" />
 </template>
 
 <style lang="scss">
-.e-button {
+.e-image {
     width: 100%;
     height: 100%;
-    text-align: center;
 }
 </style>

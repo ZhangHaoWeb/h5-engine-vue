@@ -4,13 +4,12 @@ import { useStore } from 'vuex'
 import Head from '../components/common/Head.vue';
 import SideBar from '../components/common/SideBar.vue';
 import Grid from '../components/common/Grid.vue';
-import Property from '../components/common/Property.Vue';
+import Property from '../components/common/Property.vue';
 import Shape from '../components/common/Shape.vue';
 import { COMPONENT_LIST } from "@/constants/components";
 
 const store = useStore()
-const editorSize = reactive(store.state.editor.editSize)
-const editComponentList = reactive(store.state.editor.editComponentList)
+const editStore = reactive(store.state.editor)
 const editorRef = ref()
 
 function handlerDrop(e) {
@@ -45,15 +44,17 @@ function handlerDrop(e) {
         <SideBar></SideBar>
         <div class="content" @drop="handlerDrop" @dragover="$event.preventDefault()">
             <div class="editor" ref="editorRef"
-                :style="{ width: editorSize.width + 1 + 'px', height: editorSize.height + 1 + 'px' }">
+                :style="{ width: editStore.editSize.width + 1 + 'px', height: editStore.editSize.height + 1 + 'px' }">
                 <Grid></Grid>
-                <Shape :defaultProps="component"  v-for="(component, i) in editComponentList" :idx="i" :id="'E_Component_' + i">
+                <Shape :defaultProps="component"  v-for="(component, i) in editStore.editComponentList" :idx="i" :id="'E_Component_' + i">
                     <component class="component-cell" :is="component.type"
                         :defaultProps="component" />
                 </Shape>
             </div>
         </div>
-        <Property></Property>
+        <Property>
+            <component v-for="(component, i) in editStore.editComponentList" :is="component.type + '-attr'"></component>
+        </Property>
     </div>
 </template>
 
