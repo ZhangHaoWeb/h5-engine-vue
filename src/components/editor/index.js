@@ -1,4 +1,4 @@
-const modules = import.meta.glob("./*.vue");
+const modules = import.meta.glob("./**/*.vue");
 
 /**
  * @param {object} app 
