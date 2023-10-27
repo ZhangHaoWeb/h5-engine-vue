@@ -12,10 +12,6 @@ const store = useStore()
 const editStore = reactive(store.state.editor)
 const editorRef = ref()
 
-console.log(111)
-
-// const componentProperty = editStore.editComponentList[editStore.currentComponent]
-
 function handlerDrop(e) {
     const dropComponent = e.dataTransfer.getData('component').split("-")
     const category = dropComponent[0]
