@@ -12,6 +12,10 @@ const store = useStore()
 const editStore = reactive(store.state.editor)
 const editorRef = ref()
 
+console.log(111)
+
+// const componentProperty = editStore.editComponentList[editStore.currentComponent]
+
 function handlerDrop(e) {
     const dropComponent = e.dataTransfer.getData('component').split("-")
     const category = dropComponent[0]
@@ -46,14 +50,15 @@ function handlerDrop(e) {
             <div class="editor" ref="editorRef"
                 :style="{ width: editStore.editSize.width + 1 + 'px', height: editStore.editSize.height + 1 + 'px' }">
                 <Grid></Grid>
-                <Shape :defaultProps="component"  v-for="(component, i) in editStore.editComponentList" :idx="i" :id="'E_Component_' + i">
-                    <component class="component-cell" :is="component.type"
-                        :defaultProps="component" />
+                <Shape :defaultProps="component" v-for="(component, i) in editStore.editComponentList" :idx="i"
+                    :id="'E_Component_' + i">
+                    <component class="component-cell" :is="component.type" :defaultProps="component" />
                 </Shape>
             </div>
         </div>
         <Property>
-            <component v-for="(component, i) in editStore.editComponentList" :is="component.type + '-attr'"></component>
+            <component v-if="editStore.currentComponent > -1"
+                :is="editStore.editComponentList[editStore.currentComponent].type +'-attr'"></component>
         </Property>
     </div>
 </template>
