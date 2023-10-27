@@ -22,10 +22,9 @@ export const COMPONENT_LIST =  [
                 defaultValue: "BUTTON",
                 style: {
                     background: "#313030",
-                    borderRadius: "3px",
+                    borderRadius: "4px",
                     width: "80px",
                     height: "35px",
-                    lineHeight: "35px"
                 }
             },
             {
