@@ -95,10 +95,6 @@ function handlerResizeDown(e, point) {
     const left = parseInt(strLeft, 10)
     const top = parseInt(strTop, 10)
 
-
-
-    console.log(width, height, top, left)
-
     const move = (moveEvent) => {
         const currX = moveEvent.clientX
         const currY = moveEvent.clientY
@@ -120,9 +116,6 @@ function handlerResizeDown(e, point) {
             left: (left + (hasW ? disX : 0)) + 'px',
             top:  (top + (hasN ? disY : 0)) + 'px',
         }
-
-
-        console.log(newStyle)
 
         store.commit("editor/editComponentStyle", {
             idx: props.idx,
