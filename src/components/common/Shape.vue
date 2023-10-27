@@ -56,8 +56,8 @@ function handlerMouseDown(e) {
     changeShapeSelected()
     const startY = e.clientY
     const startX = e.clientX
-    const componentDOM = e.target.parentNode
-    const { clientWidth, clientHeight, offsetLeft, offsetTop } = componentDOM
+    const offsetLeft = parseInt(props.defaultProps.style.left, 10)
+    const offsetTop = parseInt(props.defaultProps.style.top, 10)
 
     const move = (moveEvent) => {
         const moveX = moveEvent.clientX - startX
@@ -101,8 +101,6 @@ function handlerResizeDown(e, point) {
         const disY = currY - startY
         const disX = currX - startX
 
-        console.log(point)
-
         const hasN = /n/.test(point)
         const hasS = /s/.test(point)
         const hasW = /w/.test(point)
@@ -112,9 +110,9 @@ function handlerResizeDown(e, point) {
 
         const newStyle = {
             width: (newWidth > 0 ? newWidth : 0) + 'px',
-            height:( newHeight > 0 ? newHeight : 0) + 'px',
+            height: (newHeight > 0 ? newHeight : 0) + 'px',
             left: (left + (hasW ? disX : 0)) + 'px',
-            top:  (top + (hasN ? disY : 0)) + 'px',
+            top: (top + (hasN ? disY : 0)) + 'px',
         }
 
         store.commit("editor/editComponentStyle", {
